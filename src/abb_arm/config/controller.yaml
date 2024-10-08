@@ -1,0 +1,55 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100 # Set the update rate for the controller manager to 100 Hz.
+
+    # Joint State Broadcaster configuration to publish the state of joints.
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Arm Controller configuration to handle joint trajectory control.
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# Configuration for the arm_controller.
+arm_controller:
+  ros__parameters:
+    joints:
+      # List of joint names controlled by the arm controller.
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+
+    write_op_modes:
+      # List of joints that can be operated on (written to).
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+    
+    interface_name: position # The interface used for control (position control).
+
+    command_interfaces:
+      # List of command interfaces; in this case, position control.
+      - position
+    
+    state_interfaces:
+      # List of state interfaces; includes both position and velocity feedback.
+      - position
+      - velocity
+
+    state_publish_rate: 50.0 # Rate at which the state is published, default is 50 Hz.
+    action_monitor_rate: 20.0 # Rate for monitoring action feedback, default is 20 Hz.
+
+    allow_partial_joints_goal: false # Whether to allow goals that specify only some joints (default is false).
+    hardware_state_has_offset: true # Indicates if the hardware state has an offset.
+    deduce_states_from_derivatives: true # Use derivatives to infer states.
+
+    constraints:
+      # Constraints for the controller's behavior.
+      stopped_velocity_tolerance: 0.01 # Velocity tolerance to consider the joint as stopped (default is 0.01).
+      goal_time: 0.0 # Time to reach the goal; 0 means start immediately.

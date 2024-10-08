@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: abb_arm
+    relative_path: description/urdf/abb_1200.urdf.xacro
+  srdf:
+    relative_path: config/abb_1200.srdf
+  package_settings:
+    author_name: mandred
+    author_email: mandred.tech@gmail.com
+    generated_timestamp: 1728243053
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
